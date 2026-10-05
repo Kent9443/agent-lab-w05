@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus break activity picker</title>
+<style>
+:root{color-scheme:light;--ink:#17324d;--accent:#176b55;--paper:#f5f8f4;--line:#cad8cf;--focus:#b54708}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 18px 40px}header,.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 16px}h1{font-size:1.8rem;line-height:1.2;margin:0 0 8px}h2{font-size:1.2rem;margin:0 0 12px}.notice{margin:0;color:#40594c}.filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}label{display:block;font-weight:650}select,button{font:inherit;min-height:46px;border:1px solid #7b9485;border-radius:9px;padding:9px 12px;background:white;color:var(--ink)}select{display:block;width:100%;margin-top:5px}button{cursor:pointer;font-weight:700}button.primary{background:var(--accent);color:white;border-color:var(--accent)}button:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.result{min-height:100px;padding:14px;background:#f1f7f2;border-radius:12px}.result h3{margin:0 0 6px}.meta{margin:0}.muted{color:#52685b}.history{padding-left:24px;margin-bottom:0}.history li{margin:6px 0}.badge{display:inline-block;background:#e6f1ea;padding:2px 8px;border-radius:999px;margin:4px 5px 0 0;font-size:.92em}.status{min-height:1.5em;margin:8px 0 0}.footer{font-size:.94rem;margin:16px 4px;color:#40594c}@media(max-width:560px){.wrap{padding:14px 12px 28px}header,.panel{padding:16px;border-radius:13px}.filters{grid-template-columns:1fr;gap:10px}h1{font-size:1.55rem}.actions button{flex:1 1 100%}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><h1 id="title">What can I do between classes?</h1><p class="notice" id="disclaimer">Fictional teaching activities; not an official university announcement.</p><div class="actions"><button id="language" type="button" aria-label="Switch language">中文</button></div></header>
+<section class="panel" aria-labelledby="filtersHeading"><h2 id="filtersHeading">Choose your filters</h2><div class="filters">
+<label for="location" id="locationLabel">Location<select id="location"><option value="all">All locations</option><option value="indoor">Indoor</option><option value="outdoor">Outdoor</option></select></label>
+<label for="minutes" id="minutesLabel">Available time<select id="minutes"><option value="15">15 minutes</option><option value="30" selected>30 minutes</option><option value="60">60 minutes</option></select></label>
+<label for="energy" id="energyLabel">Energy<select id="energy"><option value="all">All energy levels</option><option value="low">Low</option><option value="medium">Medium</option></select></label>
+</div><div class="actions"><button class="primary" id="pick" type="button">Pick an activity</button><button id="reset" type="button">Reset filters</button></div></section>
+<section class="panel" aria-live="polite" aria-labelledby="resultHeading"><h2 id="resultHeading">Your activity</h2><div class="result" id="result"><p class="muted">Choose filters, then pick an activity.</p></div><p class="status" id="status" role="status"></p></section>
+<section class="panel" aria-labelledby="historyHeading"><h2 id="historyHeading">Recent picks</h2><ol class="history" id="history"><li class="muted">No picks yet.</li></ol><div class="actions"><button id="clear" type="button">Clear history</button></div></section>
+<p class="footer" id="footer">All activities are fictional teaching examples.</p>
+</main>
+<script>
+'use strict';
+const activities = [
+{id:'A01',name_zh:'整理書包',name_en:'Organize your bag',location_type:'indoor',minutes:10,energy:'low'},
+{id:'A02',name_zh:'畫一張小卡',name_en:'Draw a small card',location_type:'indoor',minutes:15,energy:'low'},
+{id:'A03',name_zh:'寫三句讀書筆記',name_en:'Write three study notes',location_type:'indoor',minutes:10,energy:'low'},
+{id:'A04',name_zh:'安靜讀兩頁書',name_en:'Read two pages quietly',location_type:'indoor',minutes:15,energy:'low'},
+{id:'A05',name_zh:'排好明日待辦',name_en:'Plan tomorrow’s tasks',location_type:'indoor',minutes:20,energy:'low'},
+{id:'A06',name_zh:'整理本機練習檔',name_en:'Organize practice files',location_type:'indoor',minutes:30,energy:'medium'},
+{id:'A07',name_zh:'在合適位置慢走',name_en:'Take a gentle walk in a suitable area',location_type:'outdoor',minutes:15,energy:'low'},
+{id:'A08',name_zh:'觀察天空並畫草圖',name_en:'Observe the sky and sketch',location_type:'outdoor',minutes:20,energy:'low'},
+{id:'A09',name_zh:'在合適位置快走',name_en:'Take a brisk walk in a suitable area',location_type:'outdoor',minutes:30,energy:'medium'},
+{id:'A10',name_zh:'規劃小組練習',name_en:'Plan a group exercise',location_type:'indoor',minutes:45,energy:'medium'},
+{id:'A11',name_zh:'記錄自然色彩',name_en:'Record colors in nature',location_type:'outdoor',minutes:45,energy:'low'},
+{id:'A12',name_zh:'構思下一次社團活動',name_en:'Brainstorm a future club activity',location_type:'indoor',minutes:60,energy:'medium'}];
+const copy={en:{heading:'What can I do between classes?',filters:'Choose your filters',location:'Location',locations:{all:'All locations',indoor:'Indoor',outdoor:'Outdoor'},time:'Available time',minutes:' minutes',energy:'Energy',energies:{all:'All energy levels',low:'Low',medium:'Medium'},pick:'Pick an activity',reset:'Reset filters',result:'Your activity',history:'Recent picks',clear:'Clear history',empty:'No picks yet.',start:'Choose filters, then pick an activity.',noMatch:'No matching activities.',fictional:'Fictional teaching activities; not an official university announcement.',footer:'All activities are fictional teaching examples.',activity:'Activity',id:'ID',duration:'Minutes',place:'Location',level:'Energy',indoor:'Indoor',outdoor:'Outdoor',low:'Low',medium:'Medium',switch:'中文'},zh:{heading:'下課空檔可以做什麼？',filters:'選擇條件',location:'地點',locations:{all:'不限地點',indoor:'室內',outdoor:'室外'},time:'可用時間',minutes:' 分鐘',energy:'精力',energies:{all:'不限強度',low:'低',medium:'中'},pick:'幫我選',reset:'重設條件',result:'推薦活動',history:'最近選擇',clear:'清除紀錄',empty:'尚無選擇。',start:'選好條件後，按「幫我選」。',noMatch:'沒有符合條件的活動。',fictional:'教學模擬活動，非校方公告。',footer:'所有活動皆為虛構教學範例。',activity:'活動',id:'編號',duration:'分鐘',place:'地點',level:'強度',indoor:'室內',outdoor:'室外',low:'低',medium:'中',switch:'English'}};
+let language='en';let history=[];let current=null;
+const el=id=>document.getElementById(id);function t(){return copy[language]}function renderText(){const c=t();document.documentElement.lang=language==='en'?'en':'zh-Hant';el('title').textContent=c.heading;el('filtersHeading').textContent=c.filters;el('locationLabel').firstChild.textContent=c.location;el('minutesLabel').firstChild.textContent=c.time;el('energyLabel').firstChild.textContent=c.energy;for(const [id,key] of [['location','locations'],['energy','energies']])for(const option of el(id).options)option.textContent=c[key][option.value];for(const option of el('minutes').options)option.textContent=option.value+c.minutes;el('pick').textContent=c.pick;el('reset').textContent=c.reset;el('resultHeading').textContent=c.result;el('historyHeading').textContent=c.history;el('clear').textContent=c.clear;el('disclaimer').textContent=c.fictional;el('footer').textContent=c.footer;el('language').textContent=c.switch;el('language').setAttribute('aria-label',c.switch);renderResult();renderHistory()}
+function renderResult(){const box=el('result');box.replaceChildren();if(!current){const p=document.createElement('p');p.className='muted';p.textContent=t().start;box.append(p);return}const h=document.createElement('h3');h.textContent=current[language==='en'?'name_en':'name_zh'];box.append(h);const p=document.createElement('p');p.className='meta';p.textContent=`${t().id}: ${current.id} · ${t().duration}: ${current.minutes} · ${t().place}: ${t()[current.location_type]} · ${t().level}: ${t()[current.energy]}`;box.append(p)}
+function renderHistory(){const list=el('history');list.replaceChildren();if(!history.length){const li=document.createElement('li');li.className='muted';li.textContent=t().empty;list.append(li);return}for(const item of history){const li=document.createElement('li');li.textContent=`${item.id} — ${item[language==='en'?'name_en':'name_zh']} (${item.minutes}${t().minutes})`;list.append(li)}}
+function filtered(){return activities.filter(a=>(el('location').value==='all'||a.location_type===el('location').value)&&a.minutes<=Number(el('minutes').value)&&(el('energy').value==='all'||a.energy===el('energy').value))}
+el('pick').addEventListener('click',()=>{const matches=filtered();el('status').textContent='';if(!matches.length){el('result').textContent=t().noMatch;return}current=matches[Math.floor(Math.random()*matches.length)];history.unshift(current);history=history.slice(0,5);renderResult();renderHistory()});
+el('reset').addEventListener('click',()=>{el('location').value='all';el('minutes').value='30';el('energy').value='all';el('status').textContent='';});el('clear').addEventListener('click',()=>{history=[];renderHistory()});el('language').addEventListener('click',()=>{language=language==='en'?'zh':'en';renderText()});renderText();
+</script>
+</body>
+</html>
