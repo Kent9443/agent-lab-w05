@@ -1,0 +1,62 @@
+[
+  {
+    "source": "rain_plan.txt",
+    "reason": "Rain contingency belongs with planning documents.",
+    "destination": "planning/rain_plan.txt"
+  },
+  {
+    "source": "proposal_final.txt",
+    "reason": "Proposal version 1; kept separate because it differs from version 2.",
+    "destination": "planning/proposal_final.txt"
+  },
+  {
+    "source": "proposal_final2.txt",
+    "reason": "Proposal version 2; kept separate because it differs from version 1 and is not approved.",
+    "destination": "planning/proposal_final2.txt"
+  },
+  {
+    "source": "next_steps.txt",
+    "reason": "Follow-up decision belongs with planning documents.",
+    "destination": "planning/next_steps.txt"
+  },
+  {
+    "source": "meeting_notes.txt",
+    "reason": "Meeting notes belong with planning documents.",
+    "destination": "planning/meeting_notes.txt"
+  },
+  {
+    "source": "equipment_list.txt",
+    "reason": "Equipment list belongs with supplies; identical-content counterpart retained.",
+    "destination": "supplies/equipment_list.txt"
+  },
+  {
+    "source": "equipment_backup.txt",
+    "reason": "Backup equipment list belongs with supplies; identical-content counterpart retained.",
+    "destination": "supplies/equipment_backup.txt"
+  },
+  {
+    "source": "budget_draft.txt",
+    "reason": "Draft budget belongs with supplies; it is explicitly not approved.",
+    "destination": "supplies/budget_draft.txt"
+  },
+  {
+    "source": "announcement.txt",
+    "reason": "Announcement belongs with communications; identical-content counterpart retained.",
+    "destination": "communications/announcement.txt"
+  },
+  {
+    "source": "announcement_copy.txt",
+    "reason": "Announcement copy belongs with communications; identical-content counterpart retained.",
+    "destination": "communications/announcement_copy.txt"
+  },
+  {
+    "source": "poster_text.txt",
+    "reason": "Poster copy belongs with communications.",
+    "destination": "communications/poster_text.txt"
+  },
+  {
+    "source": "feedback_questions.txt",
+    "reason": "Feedback questions belong in a separate feedback category.",
+    "destination": "feedback/feedback_questions.txt"
+  }
+]
