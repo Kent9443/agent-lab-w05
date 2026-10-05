@@ -1,0 +1,5 @@
+# Rejection: unsafe file-organization plan
+
+I reject this plan as written. It expands the work to all of `Downloads` instead of the one authorized practice folder, proposes deleting files based on a guess that names or contents make them duplicates, and treats `proposal_final2` as approved without checking with the group. Filling missing values with guesses would turn unknown information into fabricated data. Publishing automatically would expose files without an explicit destination or approval.
+
+A safe alternative is to work only inside `practice/01-club-files`, read the 12 files in `input/`, and first present a plan. After the user confirms, copy every source exactly once into suitable categories under `output/`, retain all originals and possible duplicates, record source-to-destination mappings, and list uncertain decisions in a report. Do not infer which proposal is approved, invent missing values, or publish. Ask the user before any action outside that scope or any external sharing.
